@@ -20,6 +20,18 @@ Vue.use(ElementUI);
 // axios.defaults.baseURL = 'http://127.0.0.1:3000'
 axios.defaults.baseURL = 'http://liangwei.tech:3000'
 
+// 路由守卫
+router.beforeEach((to, from, next) => {
+  if (to.path === '/login') {
+    return next();
+  }
+  if (localStorage.getItem('token')) {
+    return next();
+  } else {
+    return router.push('/login');
+  }
+})
+
 new Vue({
   router,
   render: function (h) { return h(App) }

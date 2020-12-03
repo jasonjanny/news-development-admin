@@ -36,13 +36,16 @@ export default {
         data: this.form,
       }).then((res) => {
         // console.log(res);
+        // 存储token
+        localStorage.setItem("token", res.data.data.token);
+
         if (res.data.message === "登录成功") {
           this.$message.success(res.data.message);
         } else {
-            this.$message.fail(res.data.message);
+          this.$message.fail(res.data.message);
         }
 
-        localStorage.setItem("token", res.data.data.token);
+        this.$router.push("/");
       });
     },
     reset() {
