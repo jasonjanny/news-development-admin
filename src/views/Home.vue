@@ -11,17 +11,19 @@
       >
         <el-menu-item index="2">
           <i class="el-icon-menu"></i>
-          <span slot="title">导航二</span>
+          <span slot="title">文章列表</span>
         </el-menu-item>
         <el-menu-item index="4">
           <i class="el-icon-setting"></i>
-          <span slot="title">导航四</span>
+          <span slot="title">发布文章</span>
         </el-menu-item>
       </el-menu>
     </el-aside>
     <el-container>
       <el-header>Header</el-header>
-      <el-main>Main</el-main>
+      <el-main>
+        <router-view></router-view>
+      </el-main>
     </el-container>
   </el-container>
 </template>
