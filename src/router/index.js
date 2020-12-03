@@ -8,6 +8,12 @@ import ReleasePost from '../views/ReleasePost.vue'
 
 Vue.use(VueRouter)
 
+// 解决element-ui点击同一个路由报错：NavigationDuplicated
+const originalPush = VueRouter.prototype.push;
+VueRouter.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err);
+};
+
 const routes = [
   {
     path: '/',
