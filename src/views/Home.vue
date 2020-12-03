@@ -35,10 +35,11 @@ export default {};
 <style lang="less">
 .container {
   height: 100vh;
+  .el-menu {
+    border: none;
+  }
 }
-.el-menu {
-  width: 100%;
-}
+
 .el-header {
   background-color: #b3c0d1;
   color: #333;
