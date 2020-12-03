@@ -9,11 +9,11 @@
         text-color="#fff"
         active-text-color="#ffd04b"
       >
-        <el-menu-item index="2">
+        <el-menu-item index="2" @click="$router.push('/postlist')">
           <i class="el-icon-menu"></i>
           <span slot="title">文章列表</span>
         </el-menu-item>
-        <el-menu-item index="4">
+        <el-menu-item index="4" @click="$router.push('/releasepost')">
           <i class="el-icon-setting"></i>
           <span slot="title">发布文章</span>
         </el-menu-item>
