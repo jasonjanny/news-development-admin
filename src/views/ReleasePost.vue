@@ -6,6 +6,18 @@
       <el-form-item label="标题">
         <el-input v-model="form.title"></el-input>
       </el-form-item>
+
+      <el-form-item label="栏目">
+        <el-checkbox
+          v-model="checkList"
+          :label="list.id"
+          v-for="list in categoryList"
+          :key="list.id"
+          >{{ list.name }}</el-checkbox
+        >
+      </el-form-item>
+      {{ checkList }}
+
       <el-form-item>
         <el-button type="primary" @click="onSubmit">提交</el-button>
       </el-form-item>
@@ -48,11 +60,35 @@ export default {
         cover: [],
         type: 1,
       },
+      categoryList: [],
+      checkList: [],
     };
   },
 
   components: {
     VueEditor,
+  },
+
+  created() {
+    this.$axios({
+      url: "/category",
+    }).then((res) => {
+      // console.log(res.data);
+      // 去除关注和头条栏目
+      res.data.data.splice(0, 2);
+      this.categoryList = res.data.data;
+    });
+  },
+
+  watch: {
+    // 监听栏目选中，转换格式放入form表单
+    checkList(newVal) {
+      this.form.categories = this.checkList.map((item) => {
+        return {
+          id: item,
+        };
+      });
+    },
   },
 
   methods: {
