@@ -32,6 +32,16 @@ router.beforeEach((to, from, next) => {
   }
 })
 
+// 请求拦截器
+axios.interceptors.request.use(config => {
+  // Do something before request is sent
+  // 判断请求头是否有token，如果头部没有带上token而本地又存在token
+  if (!config.headers.Authorization && localStorage.getItem('token')) {
+    config.headers.Authorization = localStorage.getItem('token');
+  }
+  return config;
+});
+
 new Vue({
   router,
   render: function (h) { return h(App) }
