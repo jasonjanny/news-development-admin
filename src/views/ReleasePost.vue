@@ -1,7 +1,11 @@
 <template>
   <div class="container">
     <div class="nav">首页 / 文章列表</div>
+    <!-- 富文本框 -->
+    <VueEditor v-model="content" />
+    {{ content }}
 
+    <!-- 图片上传 -->
     <el-upload
       :action="$axios.defaults.baseURL + '/upload'"
       list-type="picture-card"
@@ -17,11 +21,17 @@
 </template>
 
 <script>
+import { VueEditor } from "vue2-editor";
 export default {
   data() {
     return {
       token: localStorage.getItem("token"),
+      content: "",
     };
+  },
+
+  components: {
+    VueEditor,
   },
 
   methods: {
