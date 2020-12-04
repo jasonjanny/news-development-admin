@@ -10,7 +10,7 @@
 
       <!-- 富文本框 -->
       <el-form-item label="内容">
-        <VueEditor v-model="content" :editorToolbar="customToolbar" />
+        <VueEditor v-model="form.content" :editorToolbar="customToolbar" />
       </el-form-item>
 
       <!-- 栏目 -->
@@ -106,8 +106,15 @@ export default {
 
   methods: {
     //  图片上传成功
-    uploadSuccess(res, file) {
+    uploadSuccess(res, file, fileList) {
       console.log(res);
+      // 获取到上传图片的id
+      const id = res.data.id;
+
+      // 按照参数格式，将图片id 放入form表单里面的cover中
+      this.form.cover.push({
+        id,
+      });
     },
 
     // 图片移除成功
