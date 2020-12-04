@@ -2,7 +2,7 @@
   <div class="container">
     <div class="nav">首页 / 文章列表</div>
     <!-- 富文本框 -->
-    <VueEditor v-model="content" />
+    <VueEditor v-model="content" :editorToolbar="customToolbar" />
     {{ content }}
 
     <!-- 图片上传 -->
@@ -27,6 +27,11 @@ export default {
     return {
       token: localStorage.getItem("token"),
       content: "",
+      customToolbar: [
+        ["bold", "italic", "underline"],
+        [{ list: "ordered" }, { list: "bullet" }],
+        ["image", "code-block"],
+      ],
     };
   },
 
