@@ -1,13 +1,12 @@
 <template>
   <div class="container">
     <div class="nav">首页 / 文章列表</div>
+
+    <!-- 表格 -->
     <el-table :data="tableData" style="width: 100%">
-      <el-table-column label="日期" width="180">
+      <el-table-column label="ID编号" width="180">
         <template slot-scope="scope">
-          <i class="el-icon-time"></i>
-          <span style="margin-left: 10px">{{
-            scope.row.create_date.split("T")[0]
-          }}</span>
+          <span style="margin-left: 10px">{{ scope.row.id }}</span>
         </template>
       </el-table-column>
 
@@ -46,7 +45,7 @@
             alt=""
             v-if="scope.row.cover.length > 0"
           />
-          <img v-else src="../assets/logo.png" alt="" />
+          <img class="thumbnail" v-else src="../assets/logo.png" alt="" />
         </template>
       </el-table-column>
 
@@ -76,21 +75,18 @@ export default {
   },
 
   created() {
-    this.$axios({
-      url: "/post",
-      Authorization: localStorage.getItem("token"),
-    }).then((res) => {
-      console.log(res);
-      this.tableData = res.data.data;
-    });
+    this.loadPage();
   },
 
   methods: {
-    handleEdit(index, row) {
-      console.log(index, row);
-    },
-    handleDelete(index, row) {
-      console.log(index, row);
+    loadPage() {
+      this.$axios({
+        url: "/post",
+        Authorization: localStorage.getItem("token"),
+      }).then((res) => {
+        console.log(res);
+        this.tableData = res.data.data;
+      });
     },
   },
 };
