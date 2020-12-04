@@ -3,10 +3,17 @@
     <div class="nav">首页 / 文章列表</div>
     <!-- 表单 -->
     <el-form ref="form" :model="form" label-width="80px">
+      <!-- 标题 -->
       <el-form-item label="标题">
         <el-input v-model="form.title"></el-input>
       </el-form-item>
 
+      <!-- 富文本框 -->
+      <el-form-item label="内容">
+        <VueEditor v-model="content" :editorToolbar="customToolbar" />
+      </el-form-item>
+
+      <!-- 栏目 -->
       <el-form-item label="栏目">
         <el-checkbox
           v-model="checkList"
@@ -16,28 +23,34 @@
           >{{ list.name }}</el-checkbox
         >
       </el-form-item>
-      {{ checkList }}
+
+      <!-- 图片上传 -->
+      <el-form-item label="封面">
+        <el-upload
+          :action="$axios.defaults.baseURL + '/upload'"
+          list-type="picture-card"
+          :headers="{
+            Authorization: token,
+          }"
+          :on-success="uploadSuccess"
+          :on-remove="removeSuccess"
+        >
+          <i class="el-icon-plus"></i>
+        </el-upload>
+      </el-form-item>
+
+      <!-- 文章类型 -->
+      <el-form-item label="类型">
+        <el-radio-group v-model="form.type">
+          <el-radio :label="1">文章</el-radio>
+          <el-radio :label="2">视频</el-radio>
+        </el-radio-group>
+      </el-form-item>
 
       <el-form-item>
         <el-button type="primary" @click="onSubmit">提交</el-button>
       </el-form-item>
     </el-form>
-    <!-- 富文本框 -->
-    <VueEditor v-model="content" :editorToolbar="customToolbar" />
-    {{ content }}
-
-    <!-- 图片上传 -->
-    <el-upload
-      :action="$axios.defaults.baseURL + '/upload'"
-      list-type="picture-card"
-      :headers="{
-        Authorization: token,
-      }"
-      :on-success="uploadSuccess"
-      :on-remove="removeSuccess"
-    >
-      <i class="el-icon-plus"></i>
-    </el-upload>
   </div>
 </template>
 
