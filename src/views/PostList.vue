@@ -4,7 +4,7 @@
 
     <!-- 分页 -->
     <el-pagination
-      layout="prev, pager, next, total, sizes"
+      layout="prev, pager, next, total, sizes, jumper"
       :total="total"
       :page-sizes="[2, 5, 10, 20]"
       @current-change="currentChange"
