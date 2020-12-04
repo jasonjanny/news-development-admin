@@ -106,20 +106,27 @@ export default {
 
   methods: {
     //  图片上传成功
-    uploadSuccess(res, file, fileList) {
+    uploadSuccess(res, file) {
       console.log(res);
       // 获取到上传图片的id
-      const id = res.data.id;
+      // const id = res.data.id;
 
-      // 按照参数格式，将图片id 放入form表单里面的cover中
+      // 将id存入file对象
+      file.id = res.data.id;
+
+      // 直接将file对象放入form表单中
       this.form.cover.push({
-        id,
+        file,
       });
     },
 
     // 图片移除成功
-    removeSuccess(file) {
-      console.log("图片移除成功");
+    removeSuccess(file, fileList) {
+      console.log(fileList);
+      // fileList是已经删除了图片之后的数组，剩下的每张图片都存在一个对象中
+      this.form.cover.push({
+        fileList,
+      });
     },
 
     // 提交数据
