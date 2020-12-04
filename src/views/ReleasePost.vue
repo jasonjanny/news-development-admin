@@ -91,6 +91,17 @@ export default {
       res.data.data.splice(0, 2);
       this.categoryList = res.data.data;
     });
+
+    // 获取文章信息，如果进入发布文章页且带有id,表示是编辑页，需要回显数据
+    if (this.$route.query.id) {
+      this.$axios({
+        url: "/post/" + this.$route.query.id,
+      }).then((res) => {
+        // console.log(res.data);
+        // 获取到的文章数据赋值给form表单，进行数据回显
+        this.form = res.data.data;
+      });
+    }
   },
 
   watch: {
