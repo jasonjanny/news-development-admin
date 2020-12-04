@@ -1,6 +1,15 @@
 <template>
   <div class="container">
     <div class="nav">首页 / 文章列表</div>
+    <!-- 表单 -->
+    <el-form ref="form" :model="form" label-width="80px">
+      <el-form-item label="标题">
+        <el-input v-model="form.title"></el-input>
+      </el-form-item>
+      <el-form-item>
+        <el-button type="primary" @click="onSubmit">提交</el-button>
+      </el-form-item>
+    </el-form>
     <!-- 富文本框 -->
     <VueEditor v-model="content" :editorToolbar="customToolbar" />
     {{ content }}
@@ -55,6 +64,11 @@ export default {
     // 图片移除成功
     removeSuccess(file) {
       console.log("图片移除成功");
+    },
+
+    // 提交数据
+    onSubmit() {
+      console.log(this.form);
     },
   },
 };
