@@ -10,6 +10,13 @@
           }}</span>
         </template>
       </el-table-column>
+
+      <el-table-column label="标题">
+        <template slot-scope="scope">
+          {{ scope.row.title }}
+        </template>
+      </el-table-column>
+
       <el-table-column label="姓名" width="180">
         <template slot-scope="scope">
           <el-popover trigger="hover" placement="top">
@@ -30,7 +37,20 @@
           </el-popover>
         </template>
       </el-table-column>
-      <el-table-column label="操作">
+
+      <el-table-column label="缩略图" width="150">
+        <template slot-scope="scope">
+          <img
+            class="thumbnail"
+            :src="scope.row.cover[0].url"
+            alt=""
+            v-if="scope.row.cover.length > 0"
+          />
+          <img v-else src="../assets/logo.png" alt="" />
+        </template>
+      </el-table-column>
+
+      <el-table-column label="操作" width="200">
         <template slot-scope="scope">
           <el-button size="mini" @click="handleEdit(scope.$index, scope.row)"
             >编辑</el-button
@@ -86,6 +106,11 @@ export default {
   }
   .el-table {
     line-height: 0;
+  }
+  .thumbnail {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
   }
 }
 </style>
