@@ -27,6 +27,7 @@
       <!-- 图片上传 -->
       <el-form-item label="封面">
         <el-upload
+          :file-list="form.cover"
           :action="$axios.defaults.baseURL + '/upload'"
           list-type="picture-card"
           :headers="{
@@ -105,6 +106,16 @@ export default {
         // 修改多选框格式
         this.checkList = res.data.data.categories.map((item) => {
           return item.id;
+        });
+
+        // 修改图片路径不全问题
+        res.data.data.cover = res.data.data.cover.map((img) => {
+          if (img.url.indexOf("http") == -1) {
+            img.url = this.$axios.defaults.baseURL + img.url;
+          }
+          // 保持uid唯一性
+          img.uid = img.id;
+          return img;
         });
         // 获取到的文章数据赋值给form表单，进行数据回显
         this.form = res.data.data;
