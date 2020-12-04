@@ -131,7 +131,15 @@ export default {
 
     // 提交数据
     onSubmit() {
-      console.log(this.form);
+      // console.log(this.form);
+      this.$axios({
+        method: "post",
+        url: "/post",
+        data: this.form,
+      }).then((res) => {
+        // console.log(res);
+        this.$router.push("/postlist");
+      });
     },
   },
 };
