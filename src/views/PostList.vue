@@ -2,6 +2,16 @@
   <div class="container">
     <div class="nav">首页 / 文章列表</div>
 
+    <!-- 分页 -->
+    <el-pagination
+      layout="prev, pager, next, total, sizes"
+      :total="total"
+      :page-sizes="[2, 5, 10, 20]"
+      @current-change="currentChange"
+      @size-change="sizeChange"
+      :page-size="pageSize"
+    >
+    </el-pagination>
     <!-- 表格 -->
     <el-table :data="tableData" style="width: 100%">
       <el-table-column label="ID编号" width="180">
@@ -71,6 +81,9 @@ export default {
   data() {
     return {
       tableData: [],
+      pageIndex: 1,
+      pageSize: 5,
+      total: 0,
     };
   },
 
@@ -83,10 +96,24 @@ export default {
       this.$axios({
         url: "/post",
         Authorization: localStorage.getItem("token"),
+        params: {
+          pageIndex: this.pageIndex,
+          pageSize: this.pageSize,
+        },
       }).then((res) => {
         console.log(res);
         this.tableData = res.data.data;
+        this.total = res.data.total;
       });
+    },
+    currentChange(newPageIndex) {
+      this.pageIndex = newPageIndex;
+      this.loadPage();
+    },
+
+    sizeChange(newPageSize) {
+      this.pageSize = newPageSize;
+      this.loadPage();
     },
   },
 };
@@ -94,6 +121,9 @@ export default {
 
 <style lang="less" scoped>
 .container {
+  .el-pagination {
+    padding-left: 0;
+  }
   .nav {
     height: 40px;
     line-height: 40px;
