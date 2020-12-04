@@ -42,6 +42,15 @@ axios.interceptors.request.use(config => {
   return config;
 });
 
+// 过滤器
+Vue.filter('fixImgUrl', (oldUrl) => {
+  if (oldUrl.indexOf('http') > -1) {
+    return oldUrl;
+  } else {
+    return axios.defaults.baseURL + oldUrl;
+  }
+})
+
 new Vue({
   router,
   render: function (h) { return h(App) }

@@ -51,7 +51,7 @@
         <template slot-scope="scope">
           <img
             class="thumbnail"
-            :src="scope.row.cover[0].url"
+            :src="scope.row.cover[0].url | fixImgUrl"
             alt=""
             v-if="scope.row.cover.length > 0"
           />
