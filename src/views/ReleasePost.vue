@@ -97,7 +97,15 @@ export default {
       this.$axios({
         url: "/post/" + this.$route.query.id,
       }).then((res) => {
-        // console.log(res.data);
+        console.log(res.data);
+
+        // 修复富文本不能接收div标签
+        res.data.data.content = res.data.data.content.replace(/div/g, "p");
+
+        // 修改多选框格式
+        this.checkList = res.data.data.categories.map((item) => {
+          return item.id;
+        });
         // 获取到的文章数据赋值给form表单，进行数据回显
         this.form = res.data.data;
       });
