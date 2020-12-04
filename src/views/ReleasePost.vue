@@ -32,6 +32,13 @@ export default {
         [{ list: "ordered" }, { list: "bullet" }],
         ["image", "code-block"],
       ],
+      form: {
+        title: "",
+        content: "",
+        categories: [],
+        cover: [],
+        type: 1,
+      },
     };
   },
 
