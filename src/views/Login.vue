@@ -1,11 +1,11 @@
 <template>
   <el-row type="flex" justify="center" align="middle" class="container">
-    <el-form ref="form" :model="form" label-width="80px">
-      <el-form-item label="用户名">
+    <el-form ref="form" :model="form" :rules="rules" label-width="80px">
+      <el-form-item label="用户名" prop="username">
         <el-input v-model="form.username"></el-input>
       </el-form-item>
 
-      <el-form-item label="密码">
+      <el-form-item label="密码" prop="password">
         <el-input v-model="form.password" type="password"></el-input>
       </el-form-item>
 
@@ -24,6 +24,24 @@ export default {
       form: {
         username: "",
         password: "",
+      },
+      rules: {
+        // 校验用户名
+        username: [
+          {
+            trigger: "blur",
+            message: "请输入用户名",
+            required: true,
+          },
+        ],
+        // 校验密码
+        password: [
+          {
+            trigger: "blur",
+            message: "请输入密码",
+            required: true,
+          },
+        ],
       },
     };
   },
