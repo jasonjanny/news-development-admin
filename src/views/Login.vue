@@ -48,22 +48,27 @@ export default {
 
   methods: {
     onSubmit() {
-      this.$axios({
-        method: "post",
-        url: "/login",
-        data: this.form,
-      }).then((res) => {
-        // console.log(res);
-        // 存储token
-        localStorage.setItem("token", res.data.data.token);
+      // 验证整个表单
+      this.$refs.form.validate((isVal) => {
+        if (isVal) {
+          this.$axios({
+            method: "post",
+            url: "/login",
+            data: this.form,
+          }).then((res) => {
+            // console.log(res);
+            // 存储token
+            localStorage.setItem("token", res.data.data.token);
 
-        if (res.data.message === "登录成功") {
-          this.$message.success(res.data.message);
-        } else {
-          this.$message.fail(res.data.message);
+            if (res.data.message === "登录成功") {
+              this.$message.success(res.data.message);
+            } else {
+              this.$message.fail(res.data.message);
+            }
+
+            this.$router.push("/");
+          });
         }
-
-        this.$router.push("/");
       });
     },
     reset() {
