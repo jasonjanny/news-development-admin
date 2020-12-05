@@ -141,6 +141,7 @@ export default {
       // 获取到上传图片的id
       // const id = res.data.id;
 
+      console.log(file);
       // 将id存入file对象
       file.id = res.data.id;
 
@@ -148,15 +149,15 @@ export default {
       this.form.cover.push({
         file,
       });
+
+      console.log(this.form);
     },
 
     // 图片移除成功
     removeSuccess(file, fileList) {
       console.log(fileList);
       // fileList是已经删除了图片之后的数组，剩下的每张图片都存在一个对象中
-      this.form.cover.push({
-        fileList,
-      });
+      this.form.cover = fileList;
     },
 
     // 提交数据
