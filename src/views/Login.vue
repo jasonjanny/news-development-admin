@@ -49,7 +49,7 @@ export default {
   methods: {
     onSubmit() {
       // 验证整个表单
-      this.$refs.form.validate((isVal) => {
+      this.$refs.form.validate().then((isVal) => {
         if (isVal) {
           this.$axios({
             method: "post",
