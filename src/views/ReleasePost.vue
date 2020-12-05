@@ -146,9 +146,7 @@ export default {
       file.id = res.data.id;
 
       // 直接将file对象放入form表单中
-      this.form.cover.push({
-        file,
-      });
+      this.form.cover.push(file);
 
       console.log(this.form);
     },
